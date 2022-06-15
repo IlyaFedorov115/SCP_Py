@@ -1,7 +1,7 @@
 from pathlib import Path
 import numpy as np
 
-
+# parse files from OR-Library
 def parse_scp_file(filename: str):
     try:
         table = []

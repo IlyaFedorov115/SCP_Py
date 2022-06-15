@@ -69,13 +69,7 @@ if __name__ == '__main__':
                                                     alpha=alpha, alpha_inf=alpha_inf, alpha_0=alpha_0, simple_attractive=attractive,
                                                     gamma_alter=gamma_alter, move_type=move_type)
 
-    # if alpha_0 is not None:
-        # alpha = (alpha_0, alpha_inf)
-    # optimum, values = ffa_standart.ffa_algorithm(table, cost_list, pop_size=pop_size, max_iter=max_iter, gamma=gamma, betta_0=betta_0, notation='CS',
-                                                    # transfer_fun=transfer, progress=bar, distance=distance, betta_pow=betta_pow,
-                                                    # alpha=alpha, simple_attractive=attractive,
-                                                    # move_type=move_type)
-#    optimum, values = ffa_algo.firefly_algo(table, cost_list, pop_size=pop_size, max_iter=max_iter, transfer_fun=transfer, progress=bar, distance=distance)
+
 
     #print(f'\nOptimal solution {optimum}')
     print(f'\nOptimum values {values}')
