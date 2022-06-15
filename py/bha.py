@@ -10,7 +10,7 @@ def black_hole_algorithm(table, costs, pop_size=40, max_iter=500, event_horizon=
     if discrete_fun.lower() == 'standard':
         discrete = standard_discrete
     else:
-        discrete = standard_discrete
+        discrete = elitist_discrete
 
     binary_fun = binarization(transfer, discrete)
     repair_star = supscp.repair_solution(table, costs, notation)
@@ -38,7 +38,7 @@ def engine_bha(costs, pop_size, max_iter, binarization, repair_star, event_horiz
             bh_fitness, stars_fitness[min_fit_index] = stars_fitness[min_fit_index], bh_fitness
 
         stars = calc_rotation(stars, black_hole)
-        stars = binarization(stars)
+        stars = binarization(stars, best=black_hole)
         process_collapse(stars, stars_fitness, black_hole, bh_fitness, event_horizon)
 
         _ = list(map(repair_star, stars)) 

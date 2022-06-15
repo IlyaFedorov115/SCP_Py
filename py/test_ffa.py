@@ -65,7 +65,7 @@ if __name__ == '__main__':
     table, costs, cost_list = parse_scp.parse_scp_file(filename)
 
     optimum, values = ffa.ffa_algorithm(table, cost_list, pop_size=pop_size, max_iter=max_iter, gamma=gamma, betta_0=betta_0, notation='CS',
-                                                    transfer_fun=transfer, progress=bar, distance=distance, betta_pow=betta_pow,
+                                                    transfer_fun=transfer, discrete_fun=discrete, progress=bar, distance=distance, betta_pow=betta_pow,
                                                     alpha=alpha, alpha_inf=alpha_inf, alpha_0=alpha_0, simple_attractive=attractive,
                                                     gamma_alter=gamma_alter, move_type=move_type)
 

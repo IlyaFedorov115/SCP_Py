@@ -9,10 +9,15 @@ from scpmath import *
 
 # gamma = [0,1] / euclid(0000 - 1111)
 
-def ffa_algorithm(table, costs, pop_size=30, max_iter=150, gamma=1.0, betta_0=1.0, notation='CS', transfer_fun='s1',
+def ffa_algorithm(table, costs, pop_size=30, max_iter=150, gamma=1.0, betta_0=1.0, notation='CS', transfer_fun='s1', discrete_fun='standard',
                   progress=None, distance='euclid', betta_pow=2, alpha=0.5, alpha_inf=None, alpha_0=None,
                   simple_attractive=False, gamma_alter=0, move_type=None):
-    discrete = standard_discrete
+
+    if discrete_fun.lower() == 'standard':
+        discrete = standard_discrete
+    else:
+        discrete = elitist_discrete
+
     binary_fun = binarization(get_transfer_function(transfer_fun), discrete)
     repair_fun = supscp.repair_solution(table, costs, notation)
     fireflies = generate_solution((pop_size, len(costs)))
@@ -64,7 +69,7 @@ def ffa_algorithm(table, costs, pop_size=30, max_iter=150, gamma=1.0, betta_0=1.
                                             get_attractive(betta_0, gamma,
                                                            vector_dist(fireflies[i], fireflies[j], distance),
                                                            betta_pow), alpha)
-                    fireflies[i] = binary_fun(fireflies[i])
+                    fireflies[i] = binary_fun(fireflies[i], best=curr_best)
                     repair_fun(fireflies[i])
                     light_intensity[i] = supscp.calc_fitness(fireflies[i], costs)
 

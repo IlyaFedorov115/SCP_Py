@@ -43,17 +43,26 @@ def get_transfer_function(transfer_fun='s1'):
     return transfer
 
 
-def standard_discrete(transfer_fun, x):
+def standard_discrete(transfer_fun, x, **kwargs):
     x = transfer_fun(x)
     r = np.random.sample(x.shape)
     return np.where(x >= r, 1.0, 0.0)
 
 
+def elitist_discrete(transfer_fun, x, **kwargs):
+    x = transfer_fun(x)
+    r = np.random.sample(x.shape)
+    res = np.zeros(x.shape)
+    for i in range(len(res)):
+        if x[i] >= r[i]:
+            res = kwargs['best'][i]
+    return res
+
 def binarization(transfer, discretization):
-    def decorator(x):
+    def decorator(x, **kwargs):
         if x.ndim == 1:
-            return discretization(transfer, x)
+            return discretization(transfer, x, **kwargs)
         else:
-            return np.array([discretization(transfer, e) for e in x], dtype=float)
+            return np.array([discretization(transfer, e, **kwargs) for e in x], dtype=float)
 
     return decorator
